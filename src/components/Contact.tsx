@@ -60,7 +60,7 @@ export default function Contact() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-white/50 text-xl font-light max-w-md leading-relaxed"
+              className="text-white/70 text-lg font-light max-w-md leading-loose"
             >
               System ready for input. Describe the parameters of your project, and we'll engineer the solution.
             </motion.p>
@@ -170,7 +170,7 @@ export default function Contact() {
             ].map((faq, i) => (
               <div key={i} className="py-8 border-b border-white/10 group">
                 <h3 className="text-xl font-bold text-white mb-4 tracking-tight group-hover:text-[#ff6a39] transition-colors">{faq.q}</h3>
-                <p className="text-white/60 leading-relaxed">{faq.a}</p>
+                <p className="text-white/70 leading-loose text-lg">{faq.a}</p>
               </div>
             ))}
           </div>

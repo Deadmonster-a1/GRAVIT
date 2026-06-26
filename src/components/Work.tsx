@@ -131,7 +131,13 @@ export default function Work() {
       <section className="py-0 relative z-10">
         
         {/* Project 01: Image Left, Text Right */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen border-b border-white/5">
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }} 
+          whileInView={{ opacity: 1, y: 0 }} 
+          viewport={{ once: true, margin: "-100px" }} 
+          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="grid grid-cols-1 lg:grid-cols-2 min-h-screen border-b border-white/5"
+        >
            <div className="p-8 md:p-16 lg:p-24 flex items-center justify-center border-b lg:border-b-0 lg:border-r border-white/5">
               <BorderGlow glowColor="240 80 60" glowIntensity={0.6} animated={true} borderRadius={16} className="w-full aspect-square md:aspect-[4/3] relative">
                  <img src={`https://picsum.photos/seed/AURA/1200/900?grayscale`} alt="AURA" className="absolute inset-0 w-full h-full object-cover rounded-2xl opacity-60 mix-blend-luminosity hover:opacity-100 hover:mix-blend-normal transition-all duration-700" />
@@ -155,10 +161,16 @@ export default function Work() {
                  </button>
               </Magnetic>
            </div>
-        </div>
+        </motion.div>
 
         {/* Project 02: Text Left, Image Right */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen border-b border-white/5">
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }} 
+          whileInView={{ opacity: 1, y: 0 }} 
+          viewport={{ once: true, margin: "-100px" }} 
+          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="grid grid-cols-1 lg:grid-cols-2 min-h-screen border-b border-white/5"
+        >
            <div className="order-2 lg:order-1 p-8 md:p-16 lg:p-32 flex flex-col justify-center bg-gradient-to-l from-transparent to-[#ff6a39]/5 border-t lg:border-t-0 lg:border-r border-white/5">
               <h4 className="text-[#ff6a39] text-sm font-bold tracking-widest uppercase mb-4">02 / Enterprise</h4>
               <h2 className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-8">NEXUS</h2>
@@ -182,16 +194,27 @@ export default function Work() {
                  <div className="absolute inset-0 bg-[#ff6a39]/10 pointer-events-none rounded-2xl"></div>
               </BorderGlow>
            </div>
-        </div>
+        </motion.div>
 
       </section>
 
       {/* Sleek Text-Based Archive List */}
       <section className="py-32 px-4 md:px-8 lg:px-16 max-w-5xl mx-auto relative z-10 border-b border-white/5">
          <h3 className="text-3xl font-bold text-white mb-16 pb-8 border-b border-white/10">Archive</h3>
-         <div className="flex flex-col">
+         <motion.div 
+            initial="hidden" 
+            whileInView="visible" 
+            viewport={{ once: true, margin: "-50px" }} 
+            variants={{ visible: { transition: { staggerChildren: 0.1 } } }} 
+            className="flex flex-col"
+         >
             {projects.map((p, i) => (
-               <a key={i} href="#" className="group flex flex-col md:flex-row md:items-center justify-between py-8 border-b border-white/5 hover:border-white/20 transition-colors">
+               <motion.a 
+                  key={i} 
+                  href="#" 
+                  variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+                  className="group flex flex-col md:flex-row md:items-center justify-between py-8 border-b border-white/5 hover:border-white/20 transition-colors"
+               >
                   <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-12 mb-4 md:mb-0">
                      <span className="text-white/20 text-sm font-mono w-8">0{i+1}</span>
                      <h4 className="text-2xl md:text-4xl font-bold text-white group-hover:text-[#6e7bff] transition-colors">{p.title}</h4>
@@ -203,9 +226,9 @@ export default function Work() {
                         &rarr;
                      </span>
                   </div>
-               </a>
+               </motion.a>
             ))}
-         </div>
+         </motion.div>
       </section>
 
       {/* CTA Footer */}
