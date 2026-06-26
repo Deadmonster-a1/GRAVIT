@@ -6,6 +6,7 @@ import { BlendFunction } from 'postprocessing';
 import * as THREE from 'three';
 import { useScrollStore } from '../../store/useScrollStore';
 import Galaxy from '../Galaxy';
+import ParticleMorph from './ParticleMorph';
 
 function CameraRig() {
   const { camera, pointer } = useThree();
@@ -42,46 +43,7 @@ function CameraRig() {
   return null;
 }
 
-function FloatingShapes() {
-  const progress = useScrollStore((s) => s.progress);
-  const groupRef = useRef<THREE.Group>(null);
-  
-  useFrame(() => {
-    if (groupRef.current) {
-      // Group rotates and floats upward as we scroll down
-      const targetRotationY = progress * Math.PI * 2;
-      groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, targetRotationY, 0.05);
-      
-      const targetPositionY = progress * 5;
-      groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, targetPositionY, 0.05);
-    }
-  });
-
-  return (
-    <group ref={groupRef}>
-      <Float speed={2} rotationIntensity={1} floatIntensity={2} position={[-3, 1, -2]}>
-        <mesh castShadow receiveShadow>
-          <icosahedronGeometry args={[1, 0]} />
-          <meshStandardMaterial color="#2F3336" wireframe={true} />
-        </mesh>
-      </Float>
-      
-      <Float speed={1.5} rotationIntensity={1.5} floatIntensity={1} position={[3, -2, -1]}>
-        <mesh castShadow receiveShadow>
-          <octahedronGeometry args={[0.8, 0]} />
-          <meshStandardMaterial color="#ffffff" wireframe={true} />
-        </mesh>
-      </Float>
-      
-      <Float speed={3} rotationIntensity={0.5} floatIntensity={3} position={[-2, -5, -4]}>
-        <mesh castShadow receiveShadow>
-          <boxGeometry args={[1.5, 1.5, 1.5]} />
-          <meshStandardMaterial color="#2F3336" metalness={0.8} roughness={0.2} wireframe={true} />
-        </mesh>
-      </Float>
-    </group>
-  );
-}
+// FloatingShapes removed in favor of ParticleMorph
 
 export default function Scene3D() {
   return (
@@ -122,7 +84,7 @@ export default function Scene3D() {
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 5]} intensity={1.5} />
 
-        <FloatingShapes />
+        <ParticleMorph />
         <CameraRig />
 
         <EffectComposer autoClear={false} disableNormalPass multisampling={0}>
