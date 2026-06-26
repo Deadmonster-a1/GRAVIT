@@ -129,11 +129,33 @@ export default function App() {
       </AnimatePresence>
 
       <SmoothScroll>
-        <div className="film-grain" />
+
         <SplashCursor COLOR="#888888" RAINBOW_MODE={false} />
       
       {/* Global 3D Interactive Scroll Scene */}
       <Scene3D />
+
+      {/* Global HUD Layer */}
+      <div className="fixed inset-6 pointer-events-none z-[45] flex justify-between items-end font-mono text-[10px] text-white/30 uppercase tracking-widest hidden md:flex mix-blend-difference">
+        <div className="flex flex-col gap-1">
+          <span>// SYS.GRAVIT.2026 // ONLINE</span>
+          <span>LAT: 15.8281° N, LONG: 78.0373° E</span>
+        </div>
+        <div className="flex flex-col gap-1 text-right">
+          <span>[ SCROLL TO INITIATE ]</span>
+          <span>AWAITING DIRECTIVE</span>
+        </div>
+      </div>
+      
+      <div className="fixed top-6 left-6 pointer-events-none z-[45] font-mono text-[10px] text-white/30 uppercase tracking-widest hidden md:block mix-blend-difference">
+        // COPYRIGHT © 2026<br/>
+        GRAVIT INC.
+      </div>
+      
+      <div className="fixed top-6 right-6 pointer-events-none z-[45] font-mono text-[10px] text-white/30 uppercase tracking-widest hidden md:block text-right mix-blend-difference">
+        ////// MANIFESTO<br/>
+        ENGINEERING CINEMATIC MOTION
+      </div>
 
       {/* Desktop Floating Glass Header */}
       <header className="hidden md:flex fixed top-6 left-1/2 -translate-x-1/2 z-50 glass-nav rounded-full px-8 py-3 items-center gap-12 text-sm pointer-events-auto shadow-[0_0_40px_-10px_rgba(255,255,255,0.1)] w-max max-w-[90vw]">

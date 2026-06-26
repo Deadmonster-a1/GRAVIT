@@ -46,17 +46,17 @@ export default function Hero() {
           transition={{ ...spring, delay: 0.2 }}
           className="w-full flex flex-col items-center"
         >
-          <div className="text-[clamp(3rem,8vw,6rem)] leading-[1.1] font-bold tracking-tighter mb-8 text-white mix-blend-difference flex flex-col items-center justify-center">
+          <div className="text-[clamp(3.5rem,11vw,9rem)] leading-[1.05] font-bold tracking-tighter mb-8 text-white flex flex-col items-center justify-center">
             <TextType 
               text="We make the web"
               typingSpeed={50}
               showCursor={false}
-              className="block"
+              className="block drop-shadow-lg"
             />
             <div className="flex items-center justify-center mt-2">
               <RotatingText
-                texts={['feel like physics.', 'come to life.', 'earn attention.', 'stand out.']}
-                mainClassName="text-[#A1A1AA] font-serif-italic font-normal tracking-normal"
+                texts={['feel alive.', 'defy physics.', 'earn attention.', 'unforgettable.']}
+                mainClassName="bg-clip-text text-transparent bg-gradient-to-r from-[#6e7bff] via-[#a78bfa] to-[#ff6a39] font-serif-italic font-normal tracking-normal pb-4"
                 staggerFrom={"last"}
                 initial={{ y: "100%" }}
                 animate={{ y: 0 }}
@@ -94,13 +94,6 @@ export default function Hero() {
         </motion.div>
       </div>
       
-      {/* Floating Taglines */}
-      <div className="hidden md:block absolute bottom-[8%] left-[4%] text-xs text-white/50 leading-loose">
-        // DESIGN THAT<br/>SPEAKS YOUR BRAND
-      </div>
-      <div className="hidden md:block absolute bottom-[8%] right-[4%] text-xs text-white/50 text-right leading-loose">
-        // DEVELOPED WITH<br/>REACT & THREE.JS
-      </div>
     </section>
   );
 }

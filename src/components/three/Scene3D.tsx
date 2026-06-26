@@ -8,25 +8,34 @@ import { useScrollStore } from '../../store/useScrollStore';
 import Galaxy from '../Galaxy';
 
 function CameraRig() {
-  const { camera } = useThree();
+  const { camera, pointer } = useThree();
   const progress = useScrollStore((s) => s.progress);
   
-  // Define a simple camera path that moves downward and slightly rotates as we scroll
+  // Define a camera path that moves deep into the scene on scroll and reacts to mouse
   useFrame(() => {
-    // Progress goes from 0 to 1
-    // The camera starts at z=6 and moves closer or further, while rotating
-    const targetZ = 6 - progress * 4; 
-    const targetY = -progress * 2;
+    // 1. Deep Space Flight (Scroll)
+    // The camera starts at z=6 and flies deep (z=-20) as progress goes 0 -> 1
+    const targetZ = 6 - progress * 26; 
+    const targetYScroll = -progress * 2;
     
+    // 2. Cursor Parallax (Pointer)
+    // Add subtle panning based on mouse pointer (-1 to 1)
+    const pointerX = pointer.x * 0.5;
+    const pointerY = pointer.y * 0.5;
+    
+    // Smoothly interpolate position
     camera.position.z = THREE.MathUtils.lerp(camera.position.z, targetZ, 0.05);
-    camera.position.y = THREE.MathUtils.lerp(camera.position.y, targetY, 0.05);
+    camera.position.x = THREE.MathUtils.lerp(camera.position.x, pointerX, 0.05);
+    camera.position.y = THREE.MathUtils.lerp(camera.position.y, targetYScroll + pointerY, 0.05);
     
-    // Look at origin, but slightly offset based on scroll
-    const targetLookAt = new THREE.Vector3(0, -progress * 2, 0);
+    // Look ahead into the depth, slightly offset by pointer
+    const targetLookAt = new THREE.Vector3(pointerX * 0.2, targetYScroll + pointerY * 0.2, targetZ - 5);
     
     const currentLook = new THREE.Vector3();
     camera.getWorldDirection(currentLook);
     
+    // We manually interpolate rotation using lookAt for smooth dampening
+    // To do it perfectly, we could use quaternions, but lookAt every frame with a lerped position works well
     camera.lookAt(targetLookAt);
   });
   
